@@ -1,0 +1,22 @@
+# Apache / cPanel / LiteSpeed config for the Supplier WebGIS build.
+
+# Vector tiles
+AddType application/x-protobuf .pbf
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # A square with no points has no file. Answer 204 (empty) instead of an
+  # HTML 404 page, the same way tiles/server.py does.
+  RewriteCond %{REQUEST_URI} /tiles/suppliers/ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule \.pbf$ - [R=204,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.pbf$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>

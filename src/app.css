@@ -1,0 +1,73 @@
+:root {
+  --ink: #18241d;
+  --ink-soft: #3a4a41;
+  --muted: #64746a;
+  --panel: #fbfcfb;
+  --line: #d4ddd7;
+  --line-soft: #e8eeea;
+  --forest: #0f6f4a;
+  --forest-deep: #0b4f35;
+  --forest-tint: #e4f0e9;
+  --amber: #e0a526;
+  --font-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Source Sans 3', 'Segoe UI', system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Popup shell. The card inside is the Svelte component PopupCard. */
+.plot-popup .maplibregl-popup-content {
+  padding: 0;
+  border-radius: 14px;
+  background: var(--panel);
+  box-shadow: 0 14px 34px -10px rgba(16, 40, 28, 0.45), 0 0 0 1px rgba(16, 40, 28, 0.08);
+  animation: popup-in 0.16s ease-out;
+}
+
+.plot-popup.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+.plot-popup.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+.plot-popup.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+  border-top-color: var(--panel);
+}
+
+.plot-popup.maplibregl-popup-anchor-top .maplibregl-popup-tip,
+.plot-popup.maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+.plot-popup.maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+  border-bottom-color: var(--panel);
+}
+
+.plot-popup.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: var(--panel);
+}
+
+.plot-popup.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: var(--panel);
+}
+
+@keyframes popup-in {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .plot-popup .maplibregl-popup-content {
+    animation: none;
+  }
+}
